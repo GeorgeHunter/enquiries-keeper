@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enquiry;
+use App\ExcludeList;
+use function foo\func;
 use Illuminate\Http\Request;
 
 class EnquiriesController extends Controller
@@ -14,7 +16,21 @@ class EnquiriesController extends Controller
      */
     public function index()
     {
-        $dates = Enquiry::all()->groupBy(function($enq) {
+        $dates = Enquiry::when(request('start-date') && request('end-date'), function($query) {
+            $query->whereBetween('created_at', [request('start-date'), request('end-date')]);
+        })->get();
+
+        if (request('filter') === "true") {
+            $dates = $dates->reject(function($date) {
+                return ExcludeList::all()->pluck('exclusion')->contains(function($value, $key) use ($date) {
+                    return strpos($date->email, $value);
+                });
+            });
+        }
+
+
+
+        $dates = $dates->groupBy(function($enq) {
             return $enq->created_at->format('Y-m-d');
         });
 
