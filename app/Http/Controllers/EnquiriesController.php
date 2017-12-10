@@ -14,9 +14,11 @@ class EnquiriesController extends Controller
      */
     public function index()
     {
-        $enquiries = Enquiry::all();
+        $dates = Enquiry::all()->groupBy(function($enq) {
+            return $enq->created_at->format('Y-m-d');
+        });
 
-        return view('enquiries.index', compact('enquiries'));
+        return view('enquiries.index', compact('dates'));
     }
 
     /**

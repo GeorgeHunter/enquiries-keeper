@@ -15,15 +15,15 @@ class CreateEnquiriesTable extends Migration
     {
         Schema::create('enquiries', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('full_name');
-            $table->string('email');
-            $table->string('phone_number');
-            $table->string('heard_about');
-            $table->string('postcode');
-            $table->string('total_cost');
-            $table->string('job_type');
-            $table->string('job_value');
-            $table->string('job_age');
+            $table->string('full_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('heard_about')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('total_cost')->nullable();
+            $table->string('job_type')->nullable();
+            $table->string('job_value')->nullable();
+            $table->string('job_age')->nullable();
             $table->timestamps();
         });
     }
