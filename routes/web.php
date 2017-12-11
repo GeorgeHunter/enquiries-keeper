@@ -15,5 +15,6 @@ Auth::routes();
 //
 Route::middleware(['auth'])->group(function () {
     Route::get('/enquiries', 'EnquiriesController@index');
+    Route::get('/enquiries/analytics', 'EnquiriesAnalyticsController@index');
 });
 

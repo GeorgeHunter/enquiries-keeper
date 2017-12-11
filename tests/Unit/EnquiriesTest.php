@@ -30,4 +30,16 @@ class EnquiriesTest extends TestCase
         $request->assertSee('£200,000 - £299,999');
         $request->assertSee('Post 1945');
     }
+    
+    /** @test */
+    function a_user_can_see_a_chart_for_an_enquiry()
+    {
+        $user = factory(User::class)->create();
+        $enquiry = factory(Enquiry::class)->create();
+
+        $this->be($user);
+        $request = $this->get('/enquiries/analytics');
+
+//        $request->assertSee($enquiry->)
+    }
 }
