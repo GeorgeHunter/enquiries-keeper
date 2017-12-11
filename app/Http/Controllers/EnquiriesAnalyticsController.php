@@ -7,33 +7,53 @@ use Illuminate\Http\Request;
 
 class EnquiriesAnalyticsController extends Controller
 {
+
+    /**
+     * @var
+     */
+    private $enquiries;
+
+    function __construct()
+    {
+        $this->enquiries = Enquiry::select();
+    }
+
     public function index()
     {
-        $enquiries = Enquiry::get()->groupBy('job_type')->mapWithKeys(function($enquiry, $key) {
-            return [
-                str_before($key, '|') => $enquiry->count()
-            ];
-        });
+//        $this->enquiries = Enquiry::when(request('start-date') && request('end-date'), function($query) {
+//            $query->whereBetween('created_at', [request('start-date'), request('end-date')]);
+//        })->when(request('filter') === "true", function ($query) {
+//            $query->get()->reject(function($date) {
+//                return ExcludeList::all()->pluck('exclusion')->contains(function($value, $key) use ($date) {
+//                    return strpos($date->email, $value);
+//                });
+//        })->get();
 
-        $dates = Enquiry::when(request('start-date') && request('end-date'), function($query) {
+        $this->enquiries = $this->enquiries->when(request('start-date') && request('end-date'), function($query) {
             $query->whereBetween('created_at', [request('start-date'), request('end-date')]);
         })->get();
 
-        if (request('filter') === "true") {
-            $dates = $dates->reject(function($date) {
-                return ExcludeList::all()->pluck('exclusion')->contains(function($value, $key) use ($date) {
-                    return strpos($date->email, $value);
-                });
-            });
-        }
+//        if (request('filter') === "true") {
+//            $this->enquiries = $this->enquiries->reject(function($date) {
+//                return ExcludeList::all()->pluck('exclusion')->contains(function($value, $key) use ($date) {
+//                    return strpos($date->email, $value);
+//                });
+//            });
+//        }
 
-        $dates = $dates->groupBy(function($enq) {
+        $dates = $this->enquiries->groupBy(function($enq) {
             return $enq->created_at->format('Y-m-d');
         });
 
-        $heard_about = Enquiry::get()->groupBy('heard_about')->mapWithKeys(function($enquiry, $key) {
+        $heard_about = $this->enquiries->groupBy('heard_about')->mapWithKeys(function($enquiry, $key) {
             return [
                 $key => $enquiry->count()
+            ];
+        });
+
+        $enquiries = $this->enquiries->groupBy('job_type')->mapWithKeys(function($enquiry, $key) {
+            return [
+                str_before($key, '|') => $enquiry->count()
             ];
         });
 
