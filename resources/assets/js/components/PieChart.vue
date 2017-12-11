@@ -1,12 +1,12 @@
 <template>
-    <canvas id="pie-chart" width="400" height="200"></canvas>
+    <canvas :id="this.name" width="400" height="200"></canvas>
 </template>
 
 <script>
     import Chart from 'chart.js';
     export default {
 
-        props: ['data', 'title'],
+        props: ['data', 'title', 'name'],
 
         data() {
             return {
@@ -18,7 +18,7 @@
 
             console.log(this.enquiries);
 
-            new Chart(document.getElementById("pie-chart"), {
+            new Chart(document.getElementById(this.name), {
                 type: 'pie',
                 data: {
                     labels: Object.keys(this.enquiries),

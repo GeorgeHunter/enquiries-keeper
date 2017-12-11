@@ -1,7 +1,5 @@
 <template>
-    <div class="pt-4">
-        <canvas id="enquiriesChart" width="400" height="200"></canvas>
-    </div>
+    <canvas id="enquiriesChart" width="400" height="200"></canvas>
 </template>
 
 <script>

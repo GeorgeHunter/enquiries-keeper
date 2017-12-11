@@ -16,7 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('total-enquiries', require('./components/TotalEnquiries.vue'));
-Vue.component('enquiry-type-pie', require('./components/EnquiryTypePie.vue'));
+Vue.component('pie-chart', require('./components/PieChart.vue'));
 
 const app = new Vue({
     el: '#app'

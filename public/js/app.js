@@ -18200,7 +18200,7 @@ window.Vue = __webpack_require__(161);
  */
 
 Vue.component('total-enquiries', __webpack_require__(164));
-Vue.component('enquiry-type-pie', __webpack_require__(221));
+Vue.component('pie-chart', __webpack_require__(224));
 
 var app = new Vue({
   el: '#app'
@@ -61871,8 +61871,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -74956,20 +74954,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0, false, false)
+  return _c("canvas", {
+    attrs: { id: "enquiriesChart", width: "400", height: "200" }
+  })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pt-4" }, [
-      _c("canvas", {
-        attrs: { id: "enquiriesChart", width: "400", height: "200" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -74990,15 +74979,18 @@ if (false) {
 /* 218 */,
 /* 219 */,
 /* 220 */,
-/* 221 */
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(165)
 /* script */
-var __vue_script__ = __webpack_require__(222)
+var __vue_script__ = __webpack_require__(225)
 /* template */
-var __vue_template__ = __webpack_require__(223)
+var __vue_template__ = __webpack_require__(226)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -75015,7 +75007,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/EnquiryTypePie.vue"
+Component.options.__file = "resources/assets/js/components/PieChart.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -75025,9 +75017,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5573a826", Component.options)
+    hotAPI.createRecord("data-v-e092c42e", Component.options)
   } else {
-    hotAPI.reload("data-v-5573a826", Component.options)
+    hotAPI.reload("data-v-e092c42e", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -75038,7 +75030,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 222 */
+/* 225 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75053,7 +75045,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['data', 'title'],
+    props: ['data', 'title', 'name'],
 
     data: function data() {
         return {
@@ -75064,7 +75056,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         console.log(this.enquiries);
 
-        new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(document.getElementById("pie-chart"), {
+        new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(document.getElementById(this.name), {
             type: 'pie',
             data: {
                 labels: Object.keys(this.enquiries),
@@ -75085,16 +75077,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 223 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("canvas", {
-    attrs: { id: "pie-chart", width: "400", height: "200" }
-  })
+  return _c("canvas", { attrs: { id: this.name, width: "400", height: "200" } })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -75102,7 +75092,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5573a826", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-e092c42e", module.exports)
   }
 }
 
