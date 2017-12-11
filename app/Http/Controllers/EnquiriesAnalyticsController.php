@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enquiry;
+use App\ExcludeList;
 use Illuminate\Http\Request;
 
 class EnquiriesAnalyticsController extends Controller
@@ -33,13 +34,13 @@ class EnquiriesAnalyticsController extends Controller
             $query->whereBetween('created_at', [request('start-date'), request('end-date')]);
         })->get();
 
-//        if (request('filter') === "true") {
-//            $this->enquiries = $this->enquiries->reject(function($date) {
-//                return ExcludeList::all()->pluck('exclusion')->contains(function($value, $key) use ($date) {
-//                    return strpos($date->email, $value);
-//                });
-//            });
-//        }
+        if (request('filter') === "true") {
+            $this->enquiries = $this->enquiries->reject(function($date) {
+                return ExcludeList::all()->pluck('exclusion')->contains(function($value, $key) use ($date) {
+                    return strpos($date->email, $value);
+                });
+            });
+        }
 
         $dates = $this->enquiries->groupBy(function($enq) {
             return $enq->created_at->format('Y-m-d');
