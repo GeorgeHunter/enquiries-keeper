@@ -54,6 +54,7 @@
                 <pie-chart data="{{ $enquiries }}" title="Jobs by type" name="byType"></pie-chart>
             </div>
             <div class="tab-pane fade" id="total-value" role="tabpanel" aria-labelledby="total-value-tab">
+                <line-graph data="{{ $total_value }}" title="Total Value" name="totalValue"></line-graph>
             </div>
             <div class="tab-pane fade" id="heard-about" role="tabpanel" aria-labelledby="heard-about-tab">
                 <pie-chart data="{{ $heard_about }}" title="Jobs by type" name="heardAbout"></pie-chart>

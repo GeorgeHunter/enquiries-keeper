@@ -16,23 +16,24 @@
 
         mounted() {
 
-//            console.log(this.enquiries);
+            console.log(this.enquiries);
 
             new Chart(document.getElementById(this.name), {
-                type: 'pie',
+                type: 'line',
                 data: {
                     labels: Object.keys(this.enquiries),
                     datasets: [{
-                        label: "Population (millions)",
-                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                        label: 'Value',
+                        borderColor: "#3e95cd",
                         data: Object.values(this.enquiries),
+                        fill: false
                     }]
                 },
                 options: {
                     title: {
                         display: true,
                         text: this.title
-                    }
+                    },
                 }
             });
         }

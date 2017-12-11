@@ -13,22 +13,14 @@
         },
         mounted() {
 
-            let dates = Object.keys(this.enq);
-            let sends = [];
-
-            for (let key in this.enq) {
-                sends.push(this.enq[key].length);
-            }
-
-
             var ctx = document.getElementById("enquiriesChart").getContext('2d');
             var enquiriesChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: dates,
+                    labels: Object.keys(this.enq),
                     datasets: [{
                         label: '# of Enquiries',
-                        data: sends,
+                        data: Object.values(this.enq),
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
                         borderColor: 'rgba(54, 162, 235, 1)',
                         borderWidth: 1
