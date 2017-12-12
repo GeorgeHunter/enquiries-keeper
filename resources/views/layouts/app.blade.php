@@ -26,9 +26,18 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/enquiries">Enquiries</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/enquiries/analytics">Analytics</a>
+                </li>
+            </ul>
+
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    @if (Auth::guest())
+                @if (Auth::guest())
                         <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
                         <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Register</a></li>
                     @else
