@@ -21,6 +21,8 @@
                     <input type="date" class="form-control datepicker-2" id="end-date" placeholder="yyyy/mm/dd" name="end-date" value="{{ request('end-date') }}">
                 </div>
 
+                <a href="/enquiries/analytics?filter={{ request('filter') }}&start-date={{ \Carbon\Carbon::today()->format('Y-m-d') }}&end-date={{ \Carbon\Carbon::tomorrow()->format('Y-m-d') }}" class="btn btn-outline-info mr-2">Today</a>
+
                 <div class="form-check">
                     <label class="form-check-label">
                         <input name="filter" value="true" type="checkbox" class="form-check-input" {{ request('filter') == "true" ? 'checked' : '' }}>
