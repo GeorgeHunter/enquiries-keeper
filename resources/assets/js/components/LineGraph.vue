@@ -34,6 +34,13 @@
                         display: true,
                         text: this.title
                     },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }]
+                    }
                 }
             });
         }

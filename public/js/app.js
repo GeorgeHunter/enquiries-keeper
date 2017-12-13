@@ -75207,6 +75207,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 title: {
                     display: true,
                     text: this.title
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 }
             }
         });
