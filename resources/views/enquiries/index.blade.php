@@ -8,7 +8,7 @@
             @foreach($dates as $date => $enquiries)
                 <a href="/enquiries/analytics?start-date={{ $date }}&end-date={{ \Carbon\Carbon::parse($date)->addDay()->format('Y-m-d') }}" class="list-group-item list-group-item-action list-group-item-secondary">{{ $date }}</a>
                 @foreach ($enquiries as $enquiry)
-                    <li class="list-group-item">{{ $enquiry->full_name }} | {{ $enquiry->email }} | £{{ number_format($enquiry->total_cost, 2) }} | {{ str_before($enquiry->job_type, '|') }} | {{ str_before($enquiry->job_value, '|') }}</li>
+                    <li class="list-group-item">{{ $enquiry->full_name }} | {{ $enquiry->email }} | £{{ number_format($enquiry->total_cost, 2) }} | {{ str_before($enquiry->job_type, '|') }} | {{ str_before($enquiry->job_value, '|') }} {{ $enquiry->website_page ? " | $enquiry->website_page" : "" }}</li>
                 @endforeach
             @endforeach
         </ul>

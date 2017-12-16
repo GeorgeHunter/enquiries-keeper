@@ -18,7 +18,7 @@ class EnquiriesController extends Controller
     {
         $dates = Enquiry::when(request('start-date') && request('end-date'), function($query) {
             $query->whereBetween('created_at', [request('start-date'), request('end-date')]);
-        })->get();
+        })->latest()->get();
 
         if (request('filter') === "true") {
             $dates = $dates->reject(function($date) {
@@ -27,8 +27,6 @@ class EnquiriesController extends Controller
                 });
             });
         }
-
-
 
         $dates = $dates->groupBy(function($enq) {
             return $enq->created_at->format('Y-m-d');

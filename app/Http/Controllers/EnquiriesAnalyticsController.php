@@ -58,13 +58,10 @@ class EnquiriesAnalyticsController extends Controller
             return $item->sum('total_cost');
         });
 
-        // this is a bad idea and will get extracted somewhere else at some point
-        $tld = config('app.env') === "production" ? '.co.uk' : '.dev';
-
         $page_submitted = $this->enquiries->groupBy('website_page')
-            ->mapWithKeys(function($enquiry, $key) use ($tld) {
+            ->mapWithKeys(function($enquiry, $key) {
                 return [
-                    str_after($key, $tld) => $enquiry->count()
+                    $key => $enquiry->count()
                 ];
             })->reject(function($value, $key) {
                 return $key === "";
