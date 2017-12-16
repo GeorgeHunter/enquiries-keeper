@@ -91,7 +91,7 @@ class ReportsController extends Controller
         $pdf->setOption('no-stop-slow-scripts', true);
 //        $pdf->loadView('test', compact('dates', 'heard_about', 'total_value', 'enquiries'));
         $pdf->loadView('test', compact('dates', 'heard_about', 'total_value', 'enquiries', 'page_submitted', 'last_month'));
-        $pdf->save(base_path('storage/app/test.pdf'));
+        $pdf->save(base_path('storage/app/').str_random(5));
 
         Mail::to('georgehunter025@gmail.com')->send(new MonthlyReport);
 
