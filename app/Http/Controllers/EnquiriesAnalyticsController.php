@@ -59,7 +59,7 @@ class EnquiriesAnalyticsController extends Controller
         });
 
         // this is a bad idea and will get extracted somewhere else at some point
-        $tld = config('app.environment') === "production" ? '.co.uk' : '.dev';
+        $tld = config('app.env') === "production" ? '.co.uk' : '.dev';
 
         $page_submitted = $this->enquiries->groupBy('website_page')
             ->mapWithKeys(function($enquiry, $key) use ($tld) {
