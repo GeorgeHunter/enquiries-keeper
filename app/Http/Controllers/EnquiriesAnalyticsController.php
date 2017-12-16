@@ -47,7 +47,7 @@ class EnquiriesAnalyticsController extends Controller
             return [
                 $key => $enquiry->count()
             ];
-        });
+        })->sortBy('heard_about');
 
         $total_value = $this->enquiries->groupBy(function($enq) {
             return $enq->created_at->format('Y-m-d');
