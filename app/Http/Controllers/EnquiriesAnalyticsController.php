@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enquiry;
 use App\ExcludeList;
+use function foo\func;
 use Illuminate\Http\Request;
 
 class EnquiriesAnalyticsController extends Controller
@@ -44,11 +45,13 @@ class EnquiriesAnalyticsController extends Controller
 
         $heard_about = $this->enquiries->groupBy('heard_about')
             ->mapWithKeys(function($enquiry, $key) {
-            return [
-                $key => $enquiry->count()
-            ];
-        })->sortBy('heard_about');
-
+                return [
+                    $key => $enquiry->count()
+                ];
+            })->sortBy(function($value, $key) {
+                return $value;
+            })->reverse();
+        
         $total_value = $this->enquiries->groupBy(function($enq) {
             return $enq->created_at->format('Y-m-d');
         })->map(function($item) {
@@ -61,10 +64,10 @@ class EnquiriesAnalyticsController extends Controller
 
         $enquiries = $this->enquiries->groupBy('job_type')
             ->mapWithKeys(function($enquiry, $key) {
-            return [
-                str_before($key, '|') => $enquiry->count()
-            ];
-        });
+                return [
+                    str_before($key, '|') => $enquiry->count()
+                ];
+            });
 
 
         return view('enquiries.analytics.index', compact('enquiries', 'dates', 'heard_about', 'total_value'));
