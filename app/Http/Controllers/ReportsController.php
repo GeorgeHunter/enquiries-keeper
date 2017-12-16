@@ -82,7 +82,7 @@ class ReportsController extends Controller
             'Private Valuation' => 6,
         ]);
 
-//        return view('test', compact('dates', 'heard_about', 'total_value', 'enquiries'));
+//        return view('test', compact('dates', 'heard_about', 'total_value', 'enquiries', 'page_submitted', 'last_month'));
         $pdf = App::make('snappy.pdf.wrapper');
         $pdf->setOption('enable-javascript', true);
         $pdf->setOption('images', true);
@@ -91,9 +91,9 @@ class ReportsController extends Controller
         $pdf->setOption('no-stop-slow-scripts', true);
 //        $pdf->loadView('test', compact('dates', 'heard_about', 'total_value', 'enquiries'));
         $pdf->loadView('test', compact('dates', 'heard_about', 'total_value', 'enquiries', 'page_submitted', 'last_month'));
-        $pdf->save(base_path('storage/app/').str_random(5));
+        $pdf->save(base_path('storage/app/test.pdf'));
 
-        Mail::to('georgehunter025@gmail.com')->send(new MonthlyReport);
+//        Mail::to('georgehunter025@gmail.com')->send(new MonthlyReport);
 
         return "done";
     }
