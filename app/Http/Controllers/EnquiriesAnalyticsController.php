@@ -51,7 +51,7 @@ class EnquiriesAnalyticsController extends Controller
             })->sortBy(function($value, $key) {
                 return $value;
             })->reverse();
-        
+
         $total_value = $this->enquiries->groupBy(function($enq) {
             return $enq->created_at->format('Y-m-d');
         })->map(function($item) {
