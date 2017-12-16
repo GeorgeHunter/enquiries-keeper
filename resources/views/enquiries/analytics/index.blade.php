@@ -47,6 +47,9 @@
             <li class="nav-item">
                 <a class="nav-link" id="heard-about-tab" data-toggle="tab" href="#heard-about" role="tab" aria-controls="heard-about" aria-selected="false">Heard about</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="heard-about-tab" data-toggle="tab" href="#page-submitted" role="tab" aria-controls="heard-about" aria-selected="false">Page Submitted</a>
+            </li>
         </ul>
         <div class="tab-content pt-3" id="myTabContent">
             <div class="tab-pane fade show active" id="total-number" role="tabpanel" aria-labelledby="total-number-tab">
@@ -60,6 +63,9 @@
             </div>
             <div class="tab-pane fade" id="heard-about" role="tabpanel" aria-labelledby="heard-about-tab">
                 <pie-chart data="{{ $heard_about }}" title="Jobs by type" name="heardAbout"></pie-chart>
+            </div>
+            <div class="tab-pane fade" id="page-submitted" role="tabpanel" aria-labelledby="heard-about-tab">
+                <pie-chart data="{{ $page_submitted }}" title="Page form was submitted from" name="pageSubmitted"></pie-chart>
             </div>
         </div>
 

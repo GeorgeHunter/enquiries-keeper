@@ -58,9 +58,17 @@ class EnquiriesAnalyticsController extends Controller
             return $item->sum('total_cost');
         });
 
-//        $total_value = $this->enquiries->pluck('total_value', 'created_at');
+        // this is a bad idea and will get extracted somewhere else at some point
+        $tld = config('app.environment') === "production" ? '.co.uk' : '.dev';
 
-//        dd($total_value);
+        $page_submitted = $this->enquiries->groupBy('website_page')
+            ->mapWithKeys(function($enquiry, $key) use ($tld) {
+                return [
+                    str_after($key, $tld) => $enquiry->count()
+                ];
+            })->reject(function($value, $key) {
+                return $key === "";
+            });
 
         $enquiries = $this->enquiries->groupBy('job_type')
             ->mapWithKeys(function($enquiry, $key) {
@@ -70,6 +78,6 @@ class EnquiriesAnalyticsController extends Controller
             });
 
 
-        return view('enquiries.analytics.index', compact('enquiries', 'dates', 'heard_about', 'total_value'));
+        return view('enquiries.analytics.index', compact('enquiries', 'dates', 'heard_about', 'total_value', 'page_submitted'));
     }
 }
