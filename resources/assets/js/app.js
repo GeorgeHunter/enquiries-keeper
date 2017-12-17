@@ -18,6 +18,7 @@ window.Vue = require('vue');
 Vue.component('total-enquiries', require('./components/TotalEnquiries.vue'));
 Vue.component('pie-chart', require('./components/PieChart.vue'));
 Vue.component('line-graph', require('./components/LineGraph.vue'));
+Vue.component('test-app', require('./components/Test.vue'));
 
 const app = new Vue({
     el: '#app'

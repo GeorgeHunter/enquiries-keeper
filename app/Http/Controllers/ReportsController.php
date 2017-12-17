@@ -93,7 +93,7 @@ class ReportsController extends Controller
         $pdf->loadView('test', compact('dates', 'heard_about', 'total_value', 'enquiries', 'page_submitted', 'last_month'));
         $pdf->save(base_path('storage/app/test.pdf'));
 
-//        Mail::to('georgehunter025@gmail.com')->send(new MonthlyReport);
+        Mail::to('georgehunter025@gmail.com')->send(new MonthlyReport);
 
         return "done";
     }
