@@ -17,6 +17,8 @@ Route::redirect('/', '/enquiries');
 
 Route::get('report', 'ReportsController@index');
 
+Route::get('import', 'ImportController@store');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/enquiries', 'EnquiriesController@index');
     Route::get('/enquiries/analytics', 'EnquiriesAnalyticsController@index');

@@ -41,6 +41,8 @@ class EnquiriesAnalyticsController extends Controller
             return [
                 $key => $enquiry->count()
             ];
+        })->sortBy(function($value, $key) {
+            return $key;
         });
 
         $heard_about = $this->enquiries->groupBy('heard_about')
