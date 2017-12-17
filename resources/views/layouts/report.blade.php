@@ -16,7 +16,6 @@
 </head>
 <body>
 <div id="app">
-
     <div style="width: 100%; background-color: #eee; padding: 20px 40px; color: #ddd" class="mb-5">
         <img src="{{ asset('report-assets/logos/49_stella-logo.png') }}" alt="">
     </div>
