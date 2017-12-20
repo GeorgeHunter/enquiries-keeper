@@ -28,12 +28,14 @@ class EnquiriesAnalyticsController extends Controller
         })->get();
 
         if (request('filter') === "true") {
-            $this->enquiries = $this->enquiries->reject(function($date) {
-                return ExcludeList::all()->pluck('exclusion')->contains(function($value, $key) use ($date) {
-                    return strpos($date->email, $value);
+            $this->enquiries = $this->enquiries->reject(function($enquiry) {
+                return ExcludeList::all()->pluck('exclusion')->contains(function($value, $key) use ($enquiry) {
+                    return strpos($enquiry->email, $value);
                 });
             });
         }
+
+//        dd($this->enquiries->pluck('email'));
 
         $dates = $this->enquiries->groupBy(function($enq) {
             return $enq->created_at->format('Y-m-d');
@@ -69,14 +71,14 @@ class EnquiriesAnalyticsController extends Controller
                 return $key === "";
             });
 
-        $enquiries = $this->enquiries->groupBy('job_type')
+
+        $job_type = $this->enquiries->groupBy('job_type')
             ->mapWithKeys(function($enquiry, $key) {
                 return [
                     str_before($key, '|') => $enquiry->count()
                 ];
             });
 
-
-        return view('enquiries.analytics.index', compact('enquiries', 'dates', 'heard_about', 'total_value', 'page_submitted'));
+        return view('enquiries.analytics.index', compact('job_type', 'dates', 'heard_about', 'total_value', 'page_submitted'));
     }
 }
